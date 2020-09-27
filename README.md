@@ -1,3 +1,5 @@
+https://img.shields.io/github/workflow/status/laukhin/asyncpgx/CI
+
 # asyncpgx
 Extensions for asyncpg.
 
