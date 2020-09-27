@@ -23,7 +23,7 @@ class QueryParamsConverter(abc.ABC):
             return new_numeric_param
 
         query = self.params_regexp.sub(_construct_replacement, query)
-        return query, params_order_list
+        return query, 3
 
     @abc.abstractmethod
     def prepare_asyncpg_args(self, original_args: typing.Any, params_order_list: typing.List) -> typing.List:
