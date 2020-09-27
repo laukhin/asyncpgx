@@ -2,7 +2,7 @@
 Extensions for asyncpg.
 
 Based on the [asyncpg](https://github.com/MagicStack/asyncpg) and highly inspired by the [sqlx](https://github.com/jmoiron/sqlx) 
-and [sqlalchemy](https://github.com/sqlalchemy/sqlalchemy)
+and [sqlalchemy](https://github.com/sqlalchemy/sqlalchemy) packages
 
 Currently WIP
 
