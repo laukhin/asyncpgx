@@ -1,3 +1,4 @@
+"""Tests for `query` module."""
 import pytest
 
 from asyncpgx import query
