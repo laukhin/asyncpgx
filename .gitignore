@@ -1,4 +1,4 @@
 *.egg-info
 .mypy-cache
 .idea/
-__pycache__
+*/__pycache__/*
