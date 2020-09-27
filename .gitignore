@@ -1,4 +1,9 @@
 *.egg-info
 .mypy-cache
 .idea/
-*/__pycache__/*
+.coverage
+htmlcov/
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
