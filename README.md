@@ -1,6 +1,6 @@
+# asyncpgx
 [![Build passed](https://img.shields.io/github/workflow/status/laukhin/asyncpgx/CI)]()
 
-# asyncpgx
 Extensions for asyncpg.
 
 Based on the [asyncpg](https://github.com/MagicStack/asyncpg) and highly inspired by the [sqlx](https://github.com/jmoiron/sqlx) 
