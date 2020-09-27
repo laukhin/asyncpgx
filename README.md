@@ -1,4 +1,7 @@
-https://img.shields.io/github/workflow/status/laukhin/asyncpgx/CI
+.. image:: 
+[![Build passed](https://img.shields.io/github/workflow/status/laukhin/asyncpgx/CI)]()
+
+
 
 # asyncpgx
 Extensions for asyncpg.
