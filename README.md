@@ -13,7 +13,7 @@ and make only converting job.
 Original asyncpg API stays the same, you can see it in the [asyncpg documentation](https://magicstack.github.io/asyncpg/current/).
 
 ## Functionality
-* methods with named parameters, i.e.
+* queries with named parameters, i.e.
 ```sql
 SELECT field FROM some_table WHERE id <= :id;
 ```
