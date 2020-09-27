@@ -1,0 +1,60 @@
+"""Module with extensions of asyncpg `Connection` class."""
+import typing
+
+import asyncpg
+
+from asyncpgx import query as query_module
+
+
+class XConnection(asyncpg.connection.Connection):
+    """Extended version of asyncpg `Connection` class.
+
+    Provides various extension methods, but doesn't touches original
+    ones
+    """
+
+    def _prepare_asyncpg_parameters(self, query: str, args: typing.Any, converter: query_module.QueryParamsConverter):
+        """Prepare high-level query and arguments to underlying asyncpg
+        backend."""
+        converted_query, params_order_list = converter.construct_asyncpg_query(query)
+        return converted_query, converter.prepare_asyncpg_args(args, params_order_list)
+
+    async def xexecute(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None) -> str:
+        """Extended versions of `execute` with support of the named
+        parameters."""
+        converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
+            query, args, query_module.QueryParamsDictConverter()
+        )
+        return await super().execute(converted_query, *asyncpg_args, timeout=timeout)
+
+    async def xexecutemany(self, query: str, args: typing.List, *, timeout: typing.Optional[float] = None):
+        """Extended versions of `executemany` with support of the named
+        parameters."""
+        converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
+            query, args, query_module.QueryParamsListDictConverter()
+        )
+        return await super().execute(converted_query, asyncpg_args, timeout=timeout)
+
+    async def xfetch(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None):
+        """Extended versions of `fetch` with support of the named
+        parameters."""
+        converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
+            query, args, query_module.QueryParamsDictConverter()
+        )
+        return await super().fetch(converted_query, *asyncpg_args, timeout=timeout)
+
+    async def xfetchval(self, query: str, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None):
+        """Extended versions of `fetchval` with support of the named
+        parameters."""
+        converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
+            query, args, query_module.QueryParamsDictConverter()
+        )
+        return await super().fetchval(converted_query, *asyncpg_args, column=column, timeout=timeout)
+
+    async def xfetchrow(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None):
+        """Extended versions of `fetchrow` with support of the named
+        parameters."""
+        converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
+            query, args, query_module.QueryParamsDictConverter()
+        )
+        return await super().fetchrow(converted_query, *asyncpg_args, timeout=timeout)
