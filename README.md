@@ -10,7 +10,7 @@ and [sqlalchemy](https://github.com/sqlalchemy/sqlalchemy) packages
 Currently WIP
 
 ## Purpose
-This is a thin wrapper on the asyncpg package.
+This is a thin wrapper on the `asyncpg` package.
 Our purpose is to provide convenient extensions to the original package.
 We're trying to delegate as much work as we can to the asyncpg (basically our extension methods are high-level proxies to the underlying ones)
 and make only converting job.
