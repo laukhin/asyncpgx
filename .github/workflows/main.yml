@@ -41,3 +41,8 @@ jobs:
         
       - name: Run pytest
         run: pytest . --cov-report=xml --cov=.
+
+      - name: Push test coverage
+        run: |
+             export CODECOV_TOKEN="e20b12a9-9293-47fb-8e40-12f6e156f7e4"
+             bash <(curl -s https://codecov.io/bash)
