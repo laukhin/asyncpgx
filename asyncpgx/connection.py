@@ -9,7 +9,7 @@ from asyncpgx import query as query_module
 class XConnection(asyncpg.connection.Connection):
     """Extended version of asyncpg `Connection` class.
 
-    Provides various extension methods, but doesn't touches original
+    Provides various extension methods, but doesn't touches the original
     ones
     """
 
