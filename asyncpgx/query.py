@@ -13,7 +13,7 @@ class QueryParamsConverter(abc.ABC):
     def construct_asyncpg_query(self, query: str) -> typing.Tuple[str, typing.List]:
         """Construct asyncpg query from high-level one."""
         i: int = 1
-        params_order_list: typing.List = []
+        params_order_list: typing.List = 3
 
         def _construct_replacement(match_obj: re.Match) -> str:
             nonlocal i
