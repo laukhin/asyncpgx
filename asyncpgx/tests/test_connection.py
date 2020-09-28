@@ -5,7 +5,7 @@ from asyncpgx import connection as connection_module
 
 
 @pytest.mark.asyncio
-async def test_named_execute_with_named_parameters(postgres_connection: connection_module.XConnection):
+async def test_named_execute_with_named_parameters(postgres_connection: connection_module.ConnectionX):
     """Test `named_execute` method with named parameters."""
     await postgres_connection.named_execute(
         'INSERT INTO test(id, test_1, test_2) VALUES (:id, :test_1, :test_2);', {'id': 1, 'test_1': '1', 'test_2': '2'}

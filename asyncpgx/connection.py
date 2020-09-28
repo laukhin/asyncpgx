@@ -7,7 +7,7 @@ import asyncpg
 from asyncpgx import query as query_module
 
 
-class XConnection(asyncpg.connection.Connection):
+class ConnectionX(asyncpg.connection.Connection):
     """Extended version of asyncpg `Connection` class.
 
     Provides various extension methods, but doesn't touches the original
@@ -63,5 +63,5 @@ class XConnection(asyncpg.connection.Connection):
         return await super().fetchrow(converted_query, *asyncpg_args, timeout=timeout)
 
 
-create_pool: typing.Callable = functools.partial(asyncpg.create_pool, connection_class=XConnection)
-connect: typing.Callable = functools.partial(asyncpg.connect, connection_class=XConnection)
+create_pool: typing.Callable = functools.partial(asyncpg.create_pool, connection_class=ConnectionX)
+connect: typing.Callable = functools.partial(asyncpg.connect, connection_class=ConnectionX)
