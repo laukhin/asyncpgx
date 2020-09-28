@@ -33,7 +33,7 @@ jobs:
 
       - name: Install poetry
         run: |
-             python3 -m pip install --upgrade pip
+             python3.8 -m pip install --upgrade pip
              pip install poetry
              poetry config virtualenvs.create false
         
