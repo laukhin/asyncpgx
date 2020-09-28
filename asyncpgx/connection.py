@@ -14,7 +14,9 @@ class ConnectionX(asyncpg.connection.Connection):
     ones
     """
 
-    def _prepare_asyncpg_parameters(self, query: str, args: typing.Any, converter: query_module.QueryParamsConverter):
+    def _prepare_asyncpg_parameters(
+        self, query: str, args: typing.Any, converter: query_module.QueryParamsConverter
+    ) -> typing.Tuple[str, typing.List]:
         """Prepare high-level query and arguments to underlying asyncpg
         backend."""
         converted_query, params_order_list = converter.construct_asyncpg_query(query)

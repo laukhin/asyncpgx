@@ -1,7 +1,5 @@
 # TODO list
 
-* Write CD actions
-* Think about python versions
 * Integrate sphinx and github pages
 * Release first version officially!
 * Write extensions for prepared statements
