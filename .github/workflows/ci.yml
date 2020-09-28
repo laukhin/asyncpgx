@@ -14,6 +14,7 @@ jobs:
       postgres:
         image: postgres
         env:
+          POSTGRES_USER: runner
           POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
@@ -46,7 +47,7 @@ jobs:
       - name: Run pytest
         run: pytest . --cov-report=xml --cov=.
         env:
-          POSTGRESQL_TEST_DSN: postgresql://postgres:5432
+          POSTGRESQL_TEST_DSN: postgresql://runner:postgres@postgres:5432
 
       - name: Push test coverage
         run: bash <(curl -s https://codecov.io/bash)
