@@ -1,6 +1,5 @@
 # TODO list
 
-* Integrate pyre checker
 * Write CD actions
 * Think about python versions
 * Integrate sphinx and github pages
