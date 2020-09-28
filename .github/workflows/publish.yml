@@ -3,6 +3,7 @@ name: Publish
 on:
   release:
     branches: [ master ]
+    types: [ published ]
 
 jobs:
   publish:
