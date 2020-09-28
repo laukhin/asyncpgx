@@ -9,6 +9,16 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    container: debian:10.5-slim
+
+    services:
+      postgres:
+        image: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries
 
     steps:
       - uses: actions/checkout@v2
@@ -31,8 +41,10 @@ jobs:
         
       - name: Run pytest
         run: pytest . --cov-report=xml --cov=.
+        env:
+          POSTGRESQL_TEST_DSN: postgresql://postgres:5432
 
       - name: Push test coverage
-        run: |
-             export CODECOV_TOKEN="e20b12a9-9293-47fb-8e40-12f6e156f7e4"
-             bash <(curl -s https://codecov.io/bash)
+        run: bash <(curl -s https://codecov.io/bash)
+        env:
+          CODECOV_TOKEN: e20b12a9-9293-47fb-8e40-12f6e156f7e4
