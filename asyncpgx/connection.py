@@ -1,4 +1,5 @@
 """Module with extensions of asyncpg `Connection` class."""
+import functools
 import typing
 
 import asyncpg
@@ -58,3 +59,7 @@ class XConnection(asyncpg.connection.Connection):
             query, args, query_module.QueryParamsDictConverter()
         )
         return await super().fetchrow(converted_query, *asyncpg_args, timeout=timeout)
+
+
+create_pool: typing.Callable = functools.partial(asyncpg.create_pool, connection_class=XConnection)
+connect: typing.Callable = functools.partial(asyncpg.connect, connection_class=XConnection)
