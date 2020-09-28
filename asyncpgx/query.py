@@ -28,7 +28,7 @@ class QueryParamsConverter(abc.ABC):
     @abc.abstractmethod
     def prepare_asyncpg_args(self, original_args: typing.Any, params_order_list: typing.List) -> typing.List:
         """Prepare asyncpg method arguments."""
-        raise NotImplementedError()
+        raise NotImplementedError()  # pragma: no cover
 
 
 class QueryParamsListDictConverter(QueryParamsConverter):

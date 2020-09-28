@@ -34,7 +34,8 @@ class ConnectionX(asyncpg.connection.Connection):
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsListDictConverter()
         )
-        return await super().execute(converted_query, asyncpg_args, timeout=timeout)
+
+        return await super().executemany(converted_query, asyncpg_args, timeout=timeout)
 
     async def named_fetch(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None):
         """Extended versions of `fetch` with support of the named
