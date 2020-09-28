@@ -1,6 +1,6 @@
 # TODO list
 
-* Test everything
+* Test everything (on supported python versions)
 * Integrate pyre checker
 * Write CD actions
 * Release first version officially!
