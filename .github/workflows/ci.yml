@@ -29,7 +29,7 @@ jobs:
           python-version: '3.8'
       - name: Install poetry
         run: |
-             pip install poetry
+             pip3 install poetry
              poetry config virtualenvs.create false
         
       - name: Install dependencies
