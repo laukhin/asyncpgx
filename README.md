@@ -1,10 +1,14 @@
 # asyncpgx
 [![Build passed](https://img.shields.io/github/workflow/status/laukhin/asyncpgx/CI)](https://github.com/laukhin/asyncpgx/actions?query=workflow%3ACI)
 [![Test coverage](https://img.shields.io/codecov/c/github/laukhin/asyncpgx)](https://codecov.io/gh/laukhin/asyncpgx)
+[![Version](https://img.shields.io/pypi/v/asyncpgx)](https://pypi.org/project/asyncpgx/)
 
 Extensions for asyncpg.
 
 Based on the [asyncpg](https://github.com/MagicStack/asyncpg) and highly inspired by the [sqlx](https://github.com/jmoiron/sqlx) package
+
+## Setup
+Use `pip install asyncpgx`
 
 ## Purpose
 This is a thin wrapper on the `asyncpg` package.
