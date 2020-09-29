@@ -3,6 +3,7 @@ name = "asyncpgx"
 version = "1.0.2"
 description = "User-friendly extensions for asyncpg"
 authors = ["Vladislav Laukhin <laukhin97@gmail.com>"]
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8"
