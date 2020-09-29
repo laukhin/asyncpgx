@@ -57,6 +57,7 @@ jobs:
         run: |
              git remote set-url origin https://${{ secrets.DOCS_PUSH_GITHUB_LOGIN }}:${{ secrets.DOCS_PUSH_GITHUB_TOKEN }}@github.com/laukhin/asyncpgx.git
              git fetch --all
+             rm .gitignore
              cd docs
              make html
              cd build
