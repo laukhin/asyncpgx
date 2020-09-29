@@ -57,13 +57,16 @@ jobs:
         run: |
              git remote set-url origin https://${{ secrets.DOCS_PUSH_GITHUB_LOGIN }}:${{ secrets.DOCS_PUSH_GITHUB_TOKEN }}@github.com/laukhin/asyncpgx.git
              git fetch --all
-             rm .gitignore
+             find . -maxdepth 1 ! -name '.git' ! -name 'docs' -type d -exec rm -rf {} +
              cd docs
+             find . -maxdepth 1 ! -name 'build' -type d -exec rm -rf {} +
              make html
              cd build
              git config user.email "ci@fake.com"
              git config user.name "asyncpgx CI"
-             ls
+             mv html ..
+             cd ..
+             find . -maxdepth 1 ! -name 'html' -type d -exec rm -rf {} +
              git add -f html
-             git commit -m "Update the docs." -- html
+             git commit -m "Update the docs."
              git push --force origin HEAD:docs
