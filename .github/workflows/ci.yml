@@ -62,6 +62,5 @@ jobs:
              cd build
              git config user.email "ci@fake.com"
              git config user.name "asyncpgx CI"
-             git add -f html
-             git commit -m "Update the docs."
+             git commit -f -m "Update the docs." -- html
              git push --force origin HEAD:docs
