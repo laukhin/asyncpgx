@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install poetry
+        run: |
+             pip install poetry
+             poetry config virtualenvs.create false
+        
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run pylint
+        run: pylint asyncpgx
+
+      - name: Run mypy
+        run: mypy asyncpgx
+        
+      - name: Run pytest
+        run: pytest . --cov-report=xml --cov=.
+        env:
+          POSTGRES_TEST_DSN: postgresql://postgres:postgres@127.0.0.1:5432/postgres
+
+      - name: Push test coverage
+        run: bash <(curl -s https://codecov.io/bash)
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Push the docs
+        run: |
+             git remote set-url origin https://${{ secrets.DOCS_PUSH_GITHUB_LOGIN }}:${{ secrets.DOCS_PUSH_GITHUB_TOKEN }}@github.com/laukhin/asyncpgx.git
+             git fetch --all
+             cd docs
+             make html
+             cd build
+             git config user.email "ci@fake.com"
+             git config user.name "asyncpgx CI"
+             mv html ../../
+             cd ../../
+             rm -rf docs
+             mv html docs
+             git add -f docs
+             git stash
+             git checkout docs --
+             git checkout stash -- .
+             git add docs
+             git commit -m "Update the docs."
+             git push --force origin HEAD:docs
+             git checkout master
