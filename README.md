@@ -7,6 +7,8 @@ Extensions for asyncpg.
 
 Based on the [asyncpg](https://github.com/MagicStack/asyncpg) and highly inspired by the [sqlx](https://github.com/jmoiron/sqlx) package
 
+This package supports 3.6, 3.7 and 3.8 python versions
+
 ## Setup
 Use `pip install asyncpgx`
 
