@@ -6,8 +6,6 @@ Extensions for asyncpg.
 
 Based on the [asyncpg](https://github.com/MagicStack/asyncpg) and highly inspired by the [sqlx](https://github.com/jmoiron/sqlx) package
 
-Currently WIP
-
 ## Purpose
 This is a thin wrapper on the `asyncpg` package.
 Our purpose is to provide convenient extensions to the original package.
@@ -20,3 +18,6 @@ Original asyncpg API stays the same, you can see it in the [asyncpg documentatio
 ```sql
 SELECT field FROM some_table WHERE id <= :id;
 ```
+
+## Documentation
+You can find project documentation [here](https://laukhin.github.io/asyncpgx/index.html)
