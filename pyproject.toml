@@ -2,7 +2,7 @@
 name = "asyncpgx"
 version = "1.0.2"
 description = ""
-authors = ["Vladislav Laukhin <vladislav.laukhin@raiffeisen.ru>"]
+authors = ["Vladislav Laukhin <laukhin97@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
