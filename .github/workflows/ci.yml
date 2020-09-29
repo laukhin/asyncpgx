@@ -59,8 +59,8 @@ jobs:
              git fetch --all
              find . -maxdepth 1 ! -name '.git' ! -name 'docs' ! -name '.' -type d -exec rm -rf {} +
              cd docs
-             find . -maxdepth 1 ! -name 'build' ! -name '.' -type d -exec rm -rf {} +
              make html
+             find . -maxdepth 1 ! -name 'build' ! -name '.' -type d -exec rm -rf {} +
              cd build
              git config user.email "ci@fake.com"
              git config user.name "asyncpgx CI"
