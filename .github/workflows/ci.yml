@@ -67,8 +67,7 @@ jobs:
              cd ../../
              git checkout docs --
              rm -rf docs
-             mkdir docs
-             cp -r /tmp/docs /docs
+             mv /tmp/docs ./
              git add docs
              git commit -m "Update the docs."
              git push --force origin HEAD:docs
