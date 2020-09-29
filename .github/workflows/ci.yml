@@ -69,6 +69,6 @@ jobs:
              rm -rf docs
              mv /tmp/html ./docs
              git add docs
-             git commit -m "Update the docs." || echo "No need to commit."
+             git commit -m "Update the docs." || echo "No need to commit." && exit 0
              git push --force origin HEAD:docs
              git checkout master
