@@ -68,11 +68,8 @@ jobs:
              mv html docs
              git add -f docs
              git stash
-             git status
              git checkout docs --
-             mv docs docs_
-             git stash apply
-             rm -rf docs
+             git checkout stash -- .
              git add docs
              git commit -m "Update the docs."
              git push --force origin HEAD:docs
