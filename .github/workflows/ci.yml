@@ -70,10 +70,9 @@ jobs:
              git stash
              git checkout docs --
              rm -rf docs
-             ls
+             git add docs
              git stash apply
-             ls
-             git add .
+             git add docs
              git commit -m "Update the docs."
              ls
              git push --force origin HEAD:docs
