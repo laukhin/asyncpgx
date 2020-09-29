@@ -17,7 +17,7 @@ class QueryParamsConverter(abc.ABC):
 
         def _construct_replacement(match_obj) -> str:
             nonlocal i
-            new_numeric_param: str = '${}'.format(i)
+            new_numeric_param = '${}'.format(i)
             params_order_list.append(match_obj.group(0)[1::])
             i += 1
             return new_numeric_param
