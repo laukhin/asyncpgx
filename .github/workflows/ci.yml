@@ -65,6 +65,6 @@ jobs:
              mv html ../../
              cd ../../
              git add -f .
-             git checkout docs
+             git checkout docs --
              git commit -m "Update the docs."
              git push --force origin HEAD:docs
