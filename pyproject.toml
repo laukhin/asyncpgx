@@ -6,7 +6,7 @@ authors = ["Vladislav Laukhin <laukhin97@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.5"
 asyncpg = "^0.21.0"
 
 [tool.poetry.dev-dependencies]
