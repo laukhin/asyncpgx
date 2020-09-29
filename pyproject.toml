@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "asyncpgx"
-version = "1.0.2"
+version = "1.0.3"
 description = "User-friendly extensions for asyncpg"
 authors = ["Vladislav Laukhin <laukhin97@gmail.com>"]
 
