@@ -62,7 +62,7 @@ jobs:
              cd build
              git config user.email "ci@fake.com"
              git config user.name "asyncpgx CI"
-             mv html ../../
+             mv html ../../docs
              cd ../../
              git add -f html
              git checkout docs --
