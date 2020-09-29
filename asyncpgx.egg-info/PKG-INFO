@@ -1,0 +1,11 @@
+Metadata-Version: 1.2
+Name: asyncpgx
+Version: 1.0.2
+Summary: UNKNOWN
+Home-page: UNKNOWN
+Author: Vladislav Laukhin
+Author-email: laukhin97@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Requires-Python: >=3.8,<4.0

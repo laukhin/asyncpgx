@@ -1,0 +1,11 @@
+[
+  "asyncpgx/tests/test_connection.py::test_named_execute_with_named_parameters",
+  "asyncpgx/tests/test_connection.py::test_named_executemany_with_named_parameters",
+  "asyncpgx/tests/test_connection.py::test_named_fetch_with_named_parameters",
+  "asyncpgx/tests/test_connection.py::test_named_fetchrow_with_named_parameters",
+  "asyncpgx/tests/test_connection.py::test_named_fetchval_with_named_parameters",
+  "asyncpgx/tests/test_query.py::test_converter_construct_query[converter0]",
+  "asyncpgx/tests/test_query.py::test_converter_construct_query[converter1]",
+  "asyncpgx/tests/test_query.py::test_dict_converter_prepare_asyncpg_args",
+  "asyncpgx/tests/test_query.py::test_list_dict_converter_prepare_asyncpg_args"
+]
