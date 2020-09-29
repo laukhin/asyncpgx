@@ -6,6 +6,9 @@ Extensions for asyncpg.
 
 Based on the [asyncpg](https://github.com/MagicStack/asyncpg) and highly inspired by the [sqlx](https://github.com/jmoiron/sqlx) package
 
+## Setup
+Use `pip install asyncpgx`
+
 ## Purpose
 This is a thin wrapper on the `asyncpg` package.
 Our purpose is to provide convenient extensions to the original package.
