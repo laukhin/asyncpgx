@@ -12,10 +12,10 @@ class QueryParamsConverter(abc.ABC):
 
     def construct_asyncpg_query(self, query: str) -> typing.Tuple[str, typing.List]:
         """Construct asyncpg query from high-level one."""
-        i: int = 1
-        params_order_list: typing.List = []
+        i = 1
+        params_order_list = []
 
-        def _construct_replacement(match_obj: re.Match) -> str:
+        def _construct_replacement(match_obj) -> str:
             nonlocal i
             new_numeric_param: str = '${}'.format(i)
             params_order_list.append(match_obj.group(0)[1::])
@@ -37,9 +37,9 @@ class QueryParamsListDictConverter(QueryParamsConverter):
 
     def prepare_asyncpg_args(self, original_args: typing.List[typing.Dict], params_order_list: typing.List):
         """Prepare asyncpg method arguments."""
-        asyncpg_args: typing.List = []
+        asyncpg_args = []
         for arg in original_args:
-            one_list: typing.List = []
+            one_list = []
             for param in params_order_list:
                 one_list.append(arg[param])
             asyncpg_args.append(one_list)
@@ -52,7 +52,7 @@ class QueryParamsDictConverter(QueryParamsConverter):
 
     def prepare_asyncpg_args(self, original_args: typing.Dict, params_order_list: typing.List):
         """Prepare asyncpg method arguments."""
-        asyncpg_args: typing.List = []
+        asyncpg_args = []
         for param in params_order_list:
             asyncpg_args.append(original_args[param])
         return asyncpg_args
