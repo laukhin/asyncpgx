@@ -64,4 +64,4 @@ jobs:
              git config user.name "asyncpgx CI"
              git add -f html
              git commit -m "Update the docs."
-             git push --force origin docs
+             git push --force origin HEAD:docs
