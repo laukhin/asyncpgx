@@ -63,11 +63,11 @@ jobs:
              git config user.email "ci@fake.com"
              git config user.name "asyncpgx CI"
              mkdir /tmp/docs
-             cp -r html /tmp/docs
+             cp -r html /tmp/
              cd ../../
              git checkout docs --
              rm -rf docs
-             mv /tmp/docs ./
+             mv /tmp/html ./docs
              git add docs
              git commit -m "Update the docs."
              git push --force origin HEAD:docs
