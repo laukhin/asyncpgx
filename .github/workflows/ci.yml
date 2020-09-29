@@ -55,9 +55,11 @@ jobs:
 
       - name: Push the docs
         run: |
+             git remote set-url origin https://${{ secrets.DOCS_PUSH_GITHUB_LOGIN }}:${{ secrets.DOCS_PUSH_GITHUB_TOKEN }}@github.com/laukhin/asyncpgx.git
+             git fetch --all
+             git checkout docs
              cd docs
              make html
              cd build
              git add -f html
-             git remote set-url origin https://${{ secrets.DOCS_PUSH_GITHUB_LOGIN }}:${{ secrets.DOCS_PUSH_GITHUB_TOKEN }}@github.com/laukhin/asyncpgx.git
              git push --force origin docs
