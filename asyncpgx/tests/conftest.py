@@ -6,7 +6,7 @@ import pytest
 from asyncpgx import connection as connection_module
 
 
-POSTGRES_DSN: str = os.getenv('POSTGRES_TEST_DSN', 'postgresql://127.0.0.1:5432')
+POSTGRES_DSN = os.getenv('POSTGRES_TEST_DSN', 'postgresql://127.0.0.1:5432')
 
 
 @pytest.fixture

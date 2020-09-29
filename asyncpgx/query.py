@@ -8,7 +8,7 @@ class QueryParamsConverter(abc.ABC):
     """Abstract class for converting our high-level API for low-level asyncpg
     API."""
 
-    params_regexp: re.Pattern = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
+    params_regexp = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
 
     def construct_asyncpg_query(self, query: str) -> typing.Tuple[str, typing.List]:
         """Construct asyncpg query from high-level one."""

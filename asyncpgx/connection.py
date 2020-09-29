@@ -66,5 +66,5 @@ class ConnectionX(asyncpg.connection.Connection):
         return await super().fetchrow(converted_query, *asyncpg_args, timeout=timeout)
 
 
-create_pool: typing.Callable = functools.partial(asyncpg.create_pool, connection_class=ConnectionX)
-connect: typing.Callable = functools.partial(asyncpg.connect, connection_class=ConnectionX)
+create_pool = functools.partial(asyncpg.create_pool, connection_class=ConnectionX)
+connect = functools.partial(asyncpg.connect, connection_class=ConnectionX)
