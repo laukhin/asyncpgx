@@ -60,6 +60,8 @@ jobs:
              cd docs
              make html
              cd build
+             git config user.email "ci@fake.com"
+             git config user.name "asyncpgx CI"
              git add -f html
              git commit -m "Update the docs."
              git push --force origin docs
