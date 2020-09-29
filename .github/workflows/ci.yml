@@ -71,9 +71,9 @@ jobs:
              git checkout docs --
              rm -rf docs
              git add docs
+             git commit -m "Delete previous docs."
              git stash apply
              git add docs
              git commit -m "Update the docs."
-             ls
              git push --force origin HEAD:docs
              git checkout master
