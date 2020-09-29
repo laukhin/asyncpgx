@@ -65,7 +65,7 @@ jobs:
              mv html /tmp/docs
              git checkout docs --
              rm -rf docs
-             cp -r /tmp/docs /docs
+             cp -r /tmp/docs /docs_1
              git add docs
              git commit -m "Update the docs."
              git push --force origin HEAD:docs
