@@ -5,7 +5,7 @@ import typing
 
 
 class QueryParamsConverter(abc.ABC):
-    """Abstract class for converting our high-level API for low-level asyncpg
+    """Abstract class for converting our high-level API to low-level asyncpg
     API."""
 
     params_regexp = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
@@ -35,7 +35,9 @@ class QueryParamsListDictConverter(QueryParamsConverter):
     """Converts list of dicts named parameters to the asyncpg-friendly
     format."""
 
-    def prepare_asyncpg_args(self, original_args: typing.List[typing.Dict], params_order_list: typing.List):
+    def prepare_asyncpg_args(
+        self, original_args: typing.List[typing.Dict], params_order_list: typing.List
+    ) -> typing.List:
         """Prepare asyncpg method arguments."""
         asyncpg_args = []
         for arg in original_args:
@@ -50,7 +52,7 @@ class QueryParamsListDictConverter(QueryParamsConverter):
 class QueryParamsDictConverter(QueryParamsConverter):
     """Converts dict named parameters to the asyncpg-friendly format."""
 
-    def prepare_asyncpg_args(self, original_args: typing.Dict, params_order_list: typing.List):
+    def prepare_asyncpg_args(self, original_args: typing.Dict, params_order_list: typing.List) -> typing.List:
         """Prepare asyncpg method arguments."""
         asyncpg_args = []
         for param in params_order_list:

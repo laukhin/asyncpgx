@@ -30,7 +30,7 @@ class ConnectionX(asyncpg.connection.Connection):
         )
         return await super().execute(converted_query, *asyncpg_args, timeout=timeout)
 
-    async def named_executemany(self, query: str, args: typing.List, *, timeout: typing.Optional[float] = None):
+    async def named_executemany(self, query: str, args: typing.List, *, timeout: typing.Optional[float] = None) -> None:
         """Extended versions of `executemany` with support of the named
         parameters."""
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
@@ -39,7 +39,9 @@ class ConnectionX(asyncpg.connection.Connection):
 
         return await super().executemany(converted_query, asyncpg_args, timeout=timeout)
 
-    async def named_fetch(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None):
+    async def named_fetch(
+        self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None
+    ) -> typing.List[asyncpg.Record]:
         """Extended versions of `fetch` with support of the named
         parameters."""
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
@@ -49,7 +51,7 @@ class ConnectionX(asyncpg.connection.Connection):
 
     async def named_fetchval(
         self, query: str, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None
-    ):
+    ) -> typing.Optional[typing.Any]:
         """Extended versions of `fetchval` with support of the named
         parameters."""
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
@@ -57,7 +59,9 @@ class ConnectionX(asyncpg.connection.Connection):
         )
         return await super().fetchval(converted_query, *asyncpg_args, column=column, timeout=timeout)
 
-    async def named_fetchrow(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None):
+    async def named_fetchrow(
+        self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None
+    ) -> typing.Optional[asyncpg.Record]:
         """Extended versions of `fetchrow` with support of the named
         parameters."""
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
