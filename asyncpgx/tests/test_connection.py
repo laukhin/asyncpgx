@@ -82,4 +82,21 @@ async def test_named_fetchrow_with_named_parameters(postgres_connection: connect
         {'id': 2},
     )
 
-    assert fetch_result['id'] == 2
+    assert fetch_result and fetch_result['id'] == 2
+
+
+@pytest.mark.asyncio
+async def test_named_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+    """Test `named` cursor method with named parameters."""
+    await postgres_connection.execute(
+        '''
+        INSERT INTO test(id, test_1, test_2) VALUES (1, '1', '1'),(2, '2', '2'),(3, '2', '3')
+        '''
+    )
+
+    async with postgres_connection.transaction():
+        async for row in postgres_connection.named_cursor(
+            'SELECT id, test_1, test_2 FROM test WHERE test_1=:test_1', {'test_1': '2'}
+        ):
+            assert row['test_1'] == '2'
+            assert row['id'] in {2, 3}

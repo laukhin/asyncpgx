@@ -3,6 +3,7 @@ import functools
 import typing
 
 import asyncpg
+from asyncpg import cursor
 
 from asyncpgx import query as query_module
 
@@ -68,6 +69,20 @@ class ConnectionX(asyncpg.connection.Connection):
             query, args, query_module.QueryParamsDictConverter()
         )
         return await super().fetchrow(converted_query, *asyncpg_args, timeout=timeout)
+
+    def named_cursor(
+        self,
+        query: str,
+        args: typing.Dict,
+        prefetch: typing.Optional[int] = None,
+        timeout: typing.Optional[float] = None,
+    ) -> cursor.CursorFactory:
+        """Extended version of `cursor` with support of the named
+        parameters."""
+        converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
+            query, args, query_module.QueryParamsDictConverter()
+        )
+        return super().cursor(converted_query, *asyncpg_args, prefetch=prefetch, timeout=timeout)
 
 
 create_pool = functools.partial(asyncpg.create_pool, connection_class=ConnectionX)
