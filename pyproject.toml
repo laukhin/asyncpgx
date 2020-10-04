@@ -8,6 +8,7 @@ homepage = "https://github.com/laukhin/asyncpgx"
 repository = "https://github.com/laukhin/asyncpgx"
 documentation = "https://laukhin.github.io/asyncpgx/index.html"
 license = "Apache-2.0"
+keywords = ["postgresql", "asyncio", "asyncpg"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
