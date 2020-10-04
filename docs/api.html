@@ -86,6 +86,7 @@
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#module-asyncpgx.connection">Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-asyncpgx.prepared_statement">Prepared Statements</a></li>
 </ul>
 </li>
 </ul>
@@ -203,6 +204,52 @@ parameters.</p>
 <dt id="asyncpgx.connection.ConnectionX.named_fetchval">
 <em class="property">async </em><code class="sig-name descname">named_fetchval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; Optional<span class="p">[</span>Any<span class="p">]</span><a class="reference internal" href="_modules/asyncpgx/connection.html#ConnectionX.named_fetchval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.connection.ConnectionX.named_fetchval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extended versions of <cite>fetchval</cite> with support of the named
+parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="asyncpgx.connection.ConnectionX.named_prepare">
+<em class="property">async </em><code class="sig-name descname">named_prepare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#asyncpgx.prepared_statement.PreparedStatementX" title="asyncpgx.prepared_statement.PreparedStatementX">asyncpgx.prepared_statement.PreparedStatementX</a><a class="reference internal" href="_modules/asyncpgx/connection.html#ConnectionX.named_prepare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.connection.ConnectionX.named_prepare" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended version of <cite>prepare</cite> with support of the named
+parameters.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-asyncpgx.prepared_statement">
+<span id="prepared-statements"></span><h2>Prepared Statements<a class="headerlink" href="#module-asyncpgx.prepared_statement" title="Permalink to this headline">¶</a></h2>
+<p>Module with extensions of asyncpg <cite>PreparedStatement</cite> class.</p>
+<dl class="py class">
+<dt id="asyncpgx.prepared_statement.PreparedStatementX">
+<em class="property">class </em><code class="sig-prename descclassname">asyncpgx.prepared_statement.</code><code class="sig-name descname">PreparedStatementX</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">connection</span><span class="p">:</span> <span class="n">asyncpg.connection.Connection</span></em>, <em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">original_query</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">params_order_list</span><span class="p">:</span> <span class="n">List</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/prepared_statement.html#PreparedStatementX"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.prepared_statement.PreparedStatementX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended version of asyncpg <cite>PreparedStatement</cite> class.</p>
+<p>Provides various extension methods, but doesn’t touches the original
+ones</p>
+<dl class="py method">
+<dt id="asyncpgx.prepared_statement.PreparedStatementX.named_cursor">
+<code class="sig-name descname">named_cursor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict</span></em>, <em class="sig-param"><span class="n">prefetch</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/prepared_statement.html#PreparedStatementX.named_cursor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.prepared_statement.PreparedStatementX.named_cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended version of <cite>cursor</cite> with support of the named
+parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="asyncpgx.prepared_statement.PreparedStatementX.named_fetch">
+<em class="property">async </em><code class="sig-name descname">named_fetch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/prepared_statement.html#PreparedStatementX.named_fetch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.prepared_statement.PreparedStatementX.named_fetch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended version of <cite>fetch</cite> with support of the named parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="asyncpgx.prepared_statement.PreparedStatementX.named_fetchrow">
+<em class="property">async </em><code class="sig-name descname">named_fetchrow</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/prepared_statement.html#PreparedStatementX.named_fetchrow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.prepared_statement.PreparedStatementX.named_fetchrow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended version of <cite>fetchrow</cite> with support of the named
+parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="asyncpgx.prepared_statement.PreparedStatementX.named_fetchval">
+<em class="property">async </em><code class="sig-name descname">named_fetchval</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict</span></em>, <em class="sig-param"><span class="n">column</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">0</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>float<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/prepared_statement.html#PreparedStatementX.named_fetchval"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#asyncpgx.prepared_statement.PreparedStatementX.named_fetchval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended version of <cite>fetchval</cite> with support of the named
 parameters.</p>
 </dd></dl>
 

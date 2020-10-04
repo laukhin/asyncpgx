@@ -160,7 +160,7 @@
     <span class="c1"># original API stays the same</span>
     <span class="k">await</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;CREATE TABLE test (id int PRIMARY KEY, test_1 varchar (256), test_2 varchar (256))&#39;&#39;&#39;</span><span class="p">)</span>
 
-    <span class="c1"># new methods</span>
+    <span class="c1"># new connection methods</span>
     <span class="k">await</span> <span class="n">connection</span><span class="o">.</span><span class="n">named_execute</span><span class="p">(</span>
         <span class="s1">&#39;INSERT INTO test(id, test_1, test_2) VALUES (:id, :test_1, :test_2);&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;test_1&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;test_2&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}</span>
     <span class="p">)</span>
@@ -178,6 +178,20 @@
         <span class="s1">&#39;SELECT id, test_1, test_2 FROM test WHERE id=:id;&#39;</span><span class="p">,</span>
         <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
     <span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">connection</span><span class="o">.</span><span class="n">named_cursor</span><span class="p">(</span>
+            <span class="s1">&#39;SELECT id, test_1, test_2 FROM test WHERE test_1=:test_1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;test_1&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}</span>
+        <span class="p">):</span>
+            <span class="k">pass</span>
+
+    <span class="c1"># new prepared statements methods</span>
+    <span class="n">prepared_statement</span> <span class="o">=</span> <span class="k">await</span> <span class="n">connection</span><span class="o">.</span><span class="n">named_prepare</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;SELECT id, test_1, test_2 FROM test WHERE id=:id;&#39;&#39;&#39;</span><span class="p">)</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">connection</span><span class="o">.</span><span class="n">transaction</span><span class="p">():</span>
+        <span class="k">async</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_cursor</span><span class="p">({</span><span class="s1">&#39;test_1&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">}):</span>
+            <span class="k">pass</span>
+    <span class="k">await</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_fetch</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+    <span class="k">await</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_fetchval</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_fetchrow</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
