@@ -21,9 +21,23 @@ Original asyncpg API stays the same, you can see it in the [asyncpg documentatio
 
 ## Functionality
 * queries with named parameters, i.e.
-```sql
-SELECT field FROM some_table WHERE id <= :id;
+```python
+import asyncpgx
+
+connection = await asyncpgx.connect('postgresql://127.0.0.1:5432')
+await connection.named_fetch('''SELECT field FROM some_table WHERE id <= :id;''', {'id': 1})
+```
+* prepared statements with named parameters, i.e.
+```python
+import asyncpgx
+
+connection = await asyncpgx.connect('postgresql://127.0.0.1:5432')
+prepared_statement = await connection.named_prepare('''SELECT field FROM some_table WHERE id <= :id;''')
+await prepared_statement.named_fetch({'id': 1})
 ```
 
 ## Documentation
 You can find project documentation [here](https://laukhin.github.io/asyncpgx/index.html)
+
+## Changelog
+You can find all releases description [here](https://github.com/laukhin/asyncpgx/releases)

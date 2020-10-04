@@ -1,13 +1,10 @@
 """Tests for `query` module."""
-import pytest
-
 from asyncpgx import query
 
 
-@pytest.mark.parametrize('converter', [query.QueryParamsListDictConverter(), query.QueryParamsDictConverter()])
-def test_converter_construct_query(converter):
+def test_construct_query():
     """Test converter construct query."""
-    new_query, params_order_list = converter.construct_asyncpg_query(
+    new_query, params_order_list = query.construct_asyncpg_query(
         '''SELECT * FROM some_table WHERE id=:id AND some_field_1=:some_field_1 AND some_field_2=:some_field_2;'''
     )
 

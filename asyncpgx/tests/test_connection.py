@@ -87,7 +87,7 @@ async def test_named_fetchrow_with_named_parameters(postgres_connection: connect
 
 @pytest.mark.asyncio
 async def test_named_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX):
-    """Test `named` cursor method with named parameters."""
+    """Test `named_cursor` method with named parameters."""
     await postgres_connection.execute(
         '''
         INSERT INTO test(id, test_1, test_2) VALUES (1, '1', '1'),(2, '2', '2'),(3, '2', '3')
@@ -100,3 +100,68 @@ async def test_named_cursor_with_named_parameters(postgres_connection: connectio
         ):
             assert row['test_1'] == '2'
             assert row['id'] in {2, 3}
+
+
+@pytest.mark.asyncio
+async def test_named_prepare_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+    """Test `named_prepare` with `named_cursor` method with named
+    parameters."""
+    await postgres_connection.execute(
+        '''INSERT INTO test (id, test_1, test_2) VALUES (1, '1', '3'),
+                                                        (2, '2', '4'),
+                                                        (3, '2', '5')'''
+    )
+
+    prepared_statement = await postgres_connection.named_prepare(
+        '''SELECT id, test_1, test_2 FROM test WHERE test_1=:test_1;'''
+    )
+
+    async with postgres_connection.transaction():
+        async for row in prepared_statement.named_cursor({'test_1': '2'}):
+            assert row['test_1'] == '2'
+            assert row['id'] in {2, 3}
+
+
+@pytest.mark.asyncio
+async def test_named_prepare_fetch_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+    """Test `named_prepare` with `named_fetch` method with named parameters."""
+    await postgres_connection.execute('''INSERT INTO test (id, test_1, test_2) VALUES (1, '2', '3')''')
+    prepared_statement = await postgres_connection.named_prepare(
+        '''SELECT id, test_1, test_2 FROM test WHERE id=:id;'''
+    )
+
+    query_result = await prepared_statement.named_fetch({'id': 1})
+
+    assert query_result[0]['id'] == 1
+    assert query_result[0]['test_1'] == '2'
+    assert query_result[0]['test_2'] == '3'
+
+
+@pytest.mark.asyncio
+async def test_named_prepare_fetchval_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+    """Test `named_prepare` with `named_fetchval` method with named
+    parameters."""
+    await postgres_connection.execute('''INSERT INTO test (id, test_1, test_2) VALUES (1, '2', '3'), (2, '4', '5')''')
+    prepared_statement = await postgres_connection.named_prepare(
+        '''SELECT id, test_1, test_2 FROM test WHERE id=:id;'''
+    )
+
+    query_result = await prepared_statement.named_fetchval({'id': 2}, column=1)
+
+    assert query_result == '4'
+
+
+@pytest.mark.asyncio
+async def test_named_prepare_fetchrow_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+    """Test `named_prepare` with `named_fetchrow` method with named
+    parameters."""
+    await postgres_connection.execute('''INSERT INTO test (id, test_1, test_2) VALUES (1, '2', '3'), (2, '4', '5')''')
+    prepared_statement = await postgres_connection.named_prepare(
+        '''SELECT id, test_1, test_2 FROM test WHERE id=:id;'''
+    )
+
+    query_result = await prepared_statement.named_fetchrow({'id': 2})
+
+    assert query_result['id'] == 2
+    assert query_result['test_1'] == '4'
+    assert query_result['test_2'] == '5'

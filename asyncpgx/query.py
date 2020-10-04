@@ -4,26 +4,29 @@ import re
 import typing
 
 
+PARAMS_REGEXP = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
+
+
+def construct_asyncpg_query(query: str) -> typing.Tuple[str, typing.List]:
+    """Construct asyncpg query from high-level one."""
+    i = 1
+    params_order_list = []
+
+    def _construct_replacement(match_obj) -> str:
+        nonlocal i
+        new_numeric_param = f'${i}'
+        params_order_list.append(match_obj.group(0)[1::])
+        i += 1
+        return new_numeric_param
+
+    query = PARAMS_REGEXP.sub(_construct_replacement, query)
+    return query, params_order_list
+
+
+# pylint: disable=too-few-public-methods
 class QueryParamsConverter(abc.ABC):
     """Abstract class for converting our high-level API to low-level asyncpg
     API."""
-
-    params_regexp = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
-
-    def construct_asyncpg_query(self, query: str) -> typing.Tuple[str, typing.List]:
-        """Construct asyncpg query from high-level one."""
-        i = 1
-        params_order_list = []
-
-        def _construct_replacement(match_obj) -> str:
-            nonlocal i
-            new_numeric_param = f'${i}'
-            params_order_list.append(match_obj.group(0)[1::])
-            i += 1
-            return new_numeric_param
-
-        query = self.params_regexp.sub(_construct_replacement, query)
-        return query, params_order_list
 
     @abc.abstractmethod
     def prepare_asyncpg_args(self, original_args: typing.Any, params_order_list: typing.List) -> typing.List:

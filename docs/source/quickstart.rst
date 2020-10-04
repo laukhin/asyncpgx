@@ -11,7 +11,7 @@ Quickstart
         # original API stays the same
         await connection.execute('''CREATE TABLE test (id int PRIMARY KEY, test_1 varchar (256), test_2 varchar (256))''')
 
-        # new methods
+        # new connection methods
         await connection.named_execute(
             'INSERT INTO test(id, test_1, test_2) VALUES (:id, :test_1, :test_2);', {'id': 1, 'test_1': '1', 'test_2': '2'}
         )
@@ -29,3 +29,17 @@ Quickstart
             'SELECT id, test_1, test_2 FROM test WHERE id=:id;',
             {'id': 2},
         )
+        async with connection.transaction():
+            async for row in connection.named_cursor(
+                'SELECT id, test_1, test_2 FROM test WHERE test_1=:test_1', {'test_1': '2'}
+            ):
+                pass
+
+        # new prepared statements methods
+        prepared_statement = await connection.named_prepare('''SELECT id, test_1, test_2 FROM test WHERE id=:id;''')
+        async with connection.transaction():
+            async for row in prepared_statement.named_cursor({'test_1': '2'}):
+                pass
+        await prepared_statement.named_fetch({'id': 1})
+        await prepared_statement.named_fetchval({'id': 2}, column=1)
+        await prepared_statement.named_fetchrow({'id': 2})

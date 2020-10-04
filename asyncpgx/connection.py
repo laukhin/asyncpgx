@@ -5,6 +5,7 @@ import typing
 import asyncpg
 from asyncpg import cursor
 
+from asyncpgx import prepared_statement
 from asyncpgx import query as query_module
 
 
@@ -20,7 +21,7 @@ class ConnectionX(asyncpg.connection.Connection):
     ) -> typing.Tuple[str, typing.List]:
         """Prepare high-level query and arguments to underlying asyncpg
         backend."""
-        converted_query, params_order_list = converter.construct_asyncpg_query(query)
+        converted_query, params_order_list = query_module.construct_asyncpg_query(query)
         return converted_query, converter.prepare_asyncpg_args(args, params_order_list)
 
     async def named_execute(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None) -> str:
@@ -83,6 +84,16 @@ class ConnectionX(asyncpg.connection.Connection):
             query, args, query_module.QueryParamsDictConverter()
         )
         return super().cursor(converted_query, *asyncpg_args, prefetch=prefetch, timeout=timeout)
+
+    async def named_prepare(
+        self, query: str, *, timeout: typing.Optional[float] = None
+    ) -> prepared_statement.PreparedStatementX:
+        """Extended version of `prepare` with support of the named
+        parameters."""
+        converted_query, params_order_list = query_module.construct_asyncpg_query(query)
+        self._check_open()
+        stmt = await self._get_statement(converted_query, timeout, named=True, use_cache=False)
+        return prepared_statement.PreparedStatementX(self, converted_query, stmt, query, params_order_list)
 
 
 create_pool = functools.partial(asyncpg.create_pool, connection_class=ConnectionX)
