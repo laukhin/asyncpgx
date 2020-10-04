@@ -1,9 +1,12 @@
 [tool.poetry]
 name = "asyncpgx"
-version = "1.1.0"
+version = "1.1.1"
 description = "User-friendly extensions for asyncpg"
 authors = ["Vladislav Laukhin <laukhin97@gmail.com>"]
 readme = "README.md"
+homepage = "https://github.com/laukhin/asyncpgx"
+repository = "https://github.com/laukhin/asyncpgx"
+documentation = "https://laukhin.github.io/asyncpgx/index.html"
 
 [tool.poetry.dependencies]
 python = "^3.6"
