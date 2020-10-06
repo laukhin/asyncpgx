@@ -41,8 +41,7 @@ class ConnectionX(asyncpg.connection.Connection):
 
         # Scenario: When the value passed in parameter do not match the number of columns
         if number_of_values < number_of_columns:
-            raise KeyError('Values missing. Expected number of column values -> {0} :: Provided number of '
-                           'column values -> {1} (missing column values: {2})'.format(number_of_columns, number_of_values, missing_columns))
+            raise KeyError('Values missing. Columns that are missing values: {0}'.format(missing_columns))
         # Scenario: When the expected column id is not received
         if 'id' not in args:
             raise KeyError('Incorrect column name provided. Expected column -> id :: Provided column -> {}'.format(list(args.keys())[0]))
