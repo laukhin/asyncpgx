@@ -35,6 +35,7 @@ jobs:
 
       - name: Install poetry
         run: |
+             echo $GITHUB_EVENT_NAME
              pip install poetry
              poetry config virtualenvs.create false
         
