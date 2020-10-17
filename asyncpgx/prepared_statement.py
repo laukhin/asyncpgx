@@ -1,8 +1,9 @@
 """Module with extensions of asyncpg `PreparedStatement` class."""
 import typing
 
+import asyncpg
+import asyncpg.cursor
 import asyncpg.prepared_stmt
-import asyncpg.protocol
 
 from asyncpgx import query as query_module
 
@@ -34,25 +35,44 @@ class PreparedStatementX(asyncpg.prepared_stmt.PreparedStatement):
         args: typing.Dict,
         prefetch: typing.Optional[int] = None,
         timeout: typing.Optional[float] = None,
-    ):
-        """Extended version of `cursor` with support of the named
-        parameters."""
+    ) -> asyncpg.cursor.CursorFactory:
+        """Extended version of `cursor` with support of the named parameters.
+
+        :param args: Dict with the parameters values.
+        :param prefetch: The number of rows the *cursor iterator* will prefetch (defaults to ``50``.)
+        :param timeout: Optional timeout value in seconds.
+        """
         prepared_args = query_module.QueryParamsDictConverter().prepare_asyncpg_args(args, self._params_order_list)
         return super().cursor(*prepared_args, prefetch=prefetch, timeout=timeout)
 
-    async def named_fetch(self, args: typing.Dict, timeout: typing.Optional[float] = None):
-        """Extended version of `fetch` with support of the named parameters."""
+    async def named_fetch(
+        self, args: typing.Dict, timeout: typing.Optional[float] = None
+    ) -> typing.List[asyncpg.Record]:
+        """Extended version of `fetch` with support of the named parameters.
+
+        :param args: Dict with the parameters values.
+        :param timeout: Optional timeout value in seconds.
+        """
         prepared_args = query_module.QueryParamsDictConverter().prepare_asyncpg_args(args, self._params_order_list)
         return await super().fetch(*prepared_args, timeout=timeout)
 
-    async def named_fetchval(self, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None):
-        """Extended version of `fetchval` with support of the named
-        parameters."""
+    async def named_fetchval(
+        self, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None
+    ) -> typing.Any:
+        """Extended version of `fetchval` with support of the named parameters.
+
+        :param args: Dict with the parameters values.
+        :param column: Numeric index within the record of the value to return.
+        :param timeout: Optional timeout value in seconds.
+        """
         prepared_args = query_module.QueryParamsDictConverter().prepare_asyncpg_args(args, self._params_order_list)
         return await super().fetchval(*prepared_args, column=column, timeout=timeout)
 
-    async def named_fetchrow(self, args: typing.Dict, timeout: typing.Optional[float] = None):
-        """Extended version of `fetchrow` with support of the named
-        parameters."""
+    async def named_fetchrow(self, args: typing.Dict, timeout: typing.Optional[float] = None) -> asyncpg.Record:
+        """Extended version of `fetchrow` with support of the named parameters.
+
+        :param args: Dict with the parameters values.
+        :param timeout: Optional timeout value in seconds.
+        """
         prepared_args = query_module.QueryParamsDictConverter().prepare_asyncpg_args(args, self._params_order_list)
         return await super().fetchrow(*prepared_args, timeout=timeout)

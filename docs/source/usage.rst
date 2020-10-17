@@ -1,6 +1,21 @@
-=============
+=====
+Usage
+=====
+
+************************
+Connection establishment
+************************
+
+You can establish the connection via `asyncpgx.create_pool` or `asyncpgx.connect` functions.
+They have the same API as the original ones:
+
+- `create_pool <https://magicstack.github.io/asyncpg/current/api/index.html#connection-pools>`_
+- `connect <https://magicstack.github.io/asyncpg/current/api/index.html#connection>`_
+
+
+**********
 Quickstart
-=============
+**********
 
 .. code-block:: python
 
