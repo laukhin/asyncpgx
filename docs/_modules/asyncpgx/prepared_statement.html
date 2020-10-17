@@ -82,7 +82,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 </ul>
 
@@ -151,8 +151,9 @@
 <span></span><span class="sd">&quot;&quot;&quot;Module with extensions of asyncpg `PreparedStatement` class.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">typing</span>
 
+<span class="kn">import</span> <span class="nn">asyncpg</span>
+<span class="kn">import</span> <span class="nn">asyncpg.cursor</span>
 <span class="kn">import</span> <span class="nn">asyncpg.prepared_stmt</span>
-<span class="kn">import</span> <span class="nn">asyncpg.protocol</span>
 
 <span class="kn">from</span> <span class="nn">asyncpgx</span> <span class="kn">import</span> <span class="n">query</span> <span class="k">as</span> <span class="n">query_module</span>
 
@@ -184,26 +185,45 @@
         <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span>
         <span class="n">prefetch</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extended version of `cursor` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">cursor</span><span class="o">.</span><span class="n">CursorFactory</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Extended version of `cursor` with support of the named parameters.</span>
+
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param prefetch: The number of rows the *cursor iterator* will prefetch (defaults to ``50``.)</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prepared_args</span> <span class="o">=</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span><span class="o">.</span><span class="n">prepare_asyncpg_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params_order_list</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="o">*</span><span class="n">prepared_args</span><span class="p">,</span> <span class="n">prefetch</span><span class="o">=</span><span class="n">prefetch</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PreparedStatementX.named_fetch"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetch">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extended version of `fetch` with support of the named parameters.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PreparedStatementX.named_fetch"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetch">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetch</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">asyncpg</span><span class="o">.</span><span class="n">Record</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Extended version of `fetch` with support of the named parameters.</span>
+
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prepared_args</span> <span class="o">=</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span><span class="o">.</span><span class="n">prepare_asyncpg_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params_order_list</span><span class="p">)</span>
         <span class="k">return</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="o">*</span><span class="n">prepared_args</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PreparedStatementX.named_fetchval"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetchval">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetchval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extended version of `fetchval` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PreparedStatementX.named_fetchval"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetchval">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetchval</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Extended version of `fetchval` with support of the named parameters.</span>
+
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param column: Numeric index within the record of the value to return.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prepared_args</span> <span class="o">=</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span><span class="o">.</span><span class="n">prepare_asyncpg_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params_order_list</span><span class="p">)</span>
         <span class="k">return</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fetchval</span><span class="p">(</span><span class="o">*</span><span class="n">prepared_args</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PreparedStatementX.named_fetchrow"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetchrow">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetchrow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extended version of `fetchrow` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="PreparedStatementX.named_fetchrow"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetchrow">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetchrow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">Record</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Extended version of `fetchrow` with support of the named parameters.</span>
+
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prepared_args</span> <span class="o">=</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span><span class="o">.</span><span class="n">prepare_asyncpg_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params_order_list</span><span class="p">)</span>
         <span class="k">return</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fetchrow</span><span class="p">(</span><span class="o">*</span><span class="n">prepared_args</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div></div>
 </pre></div>

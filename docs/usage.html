@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Quickstart &mdash; asyncpgx 1.0.2 documentation</title>
+  <title>Usage &mdash; asyncpgx 1.0.2 documentation</title>
   
 
   
@@ -84,7 +84,11 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#connection-establishment">Connection establishment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API Reference</a></li>
 </ul>
 
@@ -132,13 +136,13 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Quickstart</li>
+      <li>Usage</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="_sources/quickstart.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -151,8 +155,19 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="quickstart">
-<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="connection-establishment">
+<h2>Connection establishment<a class="headerlink" href="#connection-establishment" title="Permalink to this headline">¶</a></h2>
+<p>You can establish the connection via <cite>asyncpgx.create_pool</cite> or <cite>asyncpgx.connect</cite> functions.
+They have the same API as the original ones:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://magicstack.github.io/asyncpg/current/api/index.html#connection-pools">create_pool</a></p></li>
+<li><p><a class="reference external" href="https://magicstack.github.io/asyncpg/current/api/index.html#connection">connect</a></p></li>
+</ul>
+</div>
+<div class="section" id="quickstart">
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncpgx</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
@@ -193,6 +208,7 @@
     <span class="k">await</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_fetchval</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">await</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_fetchrow</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 </pre></div>
+</div>
 </div>
 </div>
 

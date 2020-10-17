@@ -82,7 +82,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
 </ul>
 
@@ -175,8 +175,12 @@
         <span class="k">return</span> <span class="n">converted_query</span><span class="p">,</span> <span class="n">converter</span><span class="o">.</span><span class="n">prepare_asyncpg_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">params_order_list</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ConnectionX.named_execute"><a class="viewcode-back" href="../../api.html#asyncpgx.connection.ConnectionX.named_execute">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Extended versions of `execute` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Extended versions of `execute` with support of the named parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">asyncpg_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_asyncpg_parameters</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span>
         <span class="p">)</span>
@@ -184,7 +188,12 @@
 
 <div class="viewcode-block" id="ConnectionX.named_executemany"><a class="viewcode-back" href="../../api.html#asyncpgx.connection.ConnectionX.named_executemany">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_executemany</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Extended versions of `executemany` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+<span class="sd">        parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param args: List of dicts with the parameters values.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">asyncpg_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_asyncpg_parameters</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsListDictConverter</span><span class="p">()</span>
         <span class="p">)</span>
@@ -193,8 +202,12 @@
 <div class="viewcode-block" id="ConnectionX.named_fetch"><a class="viewcode-back" href="../../api.html#asyncpgx.connection.ConnectionX.named_fetch">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetch</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">asyncpg</span><span class="o">.</span><span class="n">Record</span><span class="p">]:</span>
-        <span class="sd">&quot;&quot;&quot;Extended versions of `fetch` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Extended versions of `fetch` with support of the named parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">asyncpg_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_asyncpg_parameters</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span>
         <span class="p">)</span>
@@ -204,7 +217,13 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Extended versions of `fetchval` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+<span class="sd">        parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param column: Numeric index within the record of the value to return.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">asyncpg_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_asyncpg_parameters</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span>
         <span class="p">)</span>
@@ -214,7 +233,12 @@
         <span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="n">asyncpg</span><span class="o">.</span><span class="n">Record</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;Extended versions of `fetchrow` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+<span class="sd">        parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">asyncpg_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_asyncpg_parameters</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span>
         <span class="p">)</span>
@@ -227,8 +251,13 @@
         <span class="n">prefetch</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">cursor</span><span class="o">.</span><span class="n">CursorFactory</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Extended version of `cursor` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Extended version of `cursor` with support of the named parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param args: Dict with the parameters values.</span>
+<span class="sd">        :param prefetch: The number of rows the *cursor iterator* will prefetch (defaults to ``50``.)</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">asyncpg_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_asyncpg_parameters</span><span class="p">(</span>
             <span class="n">query</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span>
         <span class="p">)</span>
@@ -237,8 +266,11 @@
 <div class="viewcode-block" id="ConnectionX.named_prepare"><a class="viewcode-back" href="../../api.html#asyncpgx.connection.ConnectionX.named_prepare">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_prepare</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">PreparedStatementX</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Extended version of `prepare` with support of the named</span>
-<span class="sd">        parameters.&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Extended version of `prepare` with support of the named parameters.</span>
+
+<span class="sd">        :param query: SQL query to execute (could include named parameters).</span>
+<span class="sd">        :param timeout: Optional timeout value in seconds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">converted_query</span><span class="p">,</span> <span class="n">params_order_list</span> <span class="o">=</span> <span class="n">query_module</span><span class="o">.</span><span class="n">construct_asyncpg_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_open</span><span class="p">()</span>
         <span class="n">stmt</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_statement</span><span class="p">(</span><span class="n">converted_query</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">named</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
