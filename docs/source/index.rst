@@ -11,5 +11,5 @@ If you use asyncpg you can replace `connect` or `create_pool` methods to ours an
    :maxdepth: 2
    :caption: Contents:
 
-   quickstart
+   usage
    api
