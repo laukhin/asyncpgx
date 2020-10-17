@@ -25,8 +25,12 @@ class ConnectionX(asyncpg.connection.Connection):
         return converted_query, converter.prepare_asyncpg_args(args, params_order_list)
 
     async def named_execute(self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None) -> str:
-        """Extended versions of `execute` with support of the named
-        parameters."""
+        """Extended versions of `execute` with support of the named parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param args: Dict with the parameters values.
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
@@ -34,7 +38,12 @@ class ConnectionX(asyncpg.connection.Connection):
 
     async def named_executemany(self, query: str, args: typing.List, *, timeout: typing.Optional[float] = None) -> None:
         """Extended versions of `executemany` with support of the named
-        parameters."""
+        parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param args: List of dicts with the parameters values.
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsListDictConverter()
         )
@@ -43,8 +52,12 @@ class ConnectionX(asyncpg.connection.Connection):
     async def named_fetch(
         self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None
     ) -> typing.List[asyncpg.Record]:
-        """Extended versions of `fetch` with support of the named
-        parameters."""
+        """Extended versions of `fetch` with support of the named parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param args: Dict with the parameters values.
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
@@ -54,7 +67,13 @@ class ConnectionX(asyncpg.connection.Connection):
         self, query: str, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None
     ) -> typing.Optional[typing.Any]:
         """Extended versions of `fetchval` with support of the named
-        parameters."""
+        parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param args: Dict with the parameters values.
+        :param column: Numeric index within the record of the value to return.
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
@@ -64,7 +83,12 @@ class ConnectionX(asyncpg.connection.Connection):
         self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None
     ) -> typing.Optional[asyncpg.Record]:
         """Extended versions of `fetchrow` with support of the named
-        parameters."""
+        parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param args: Dict with the parameters values.
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
@@ -77,8 +101,13 @@ class ConnectionX(asyncpg.connection.Connection):
         prefetch: typing.Optional[int] = None,
         timeout: typing.Optional[float] = None,
     ) -> cursor.CursorFactory:
-        """Extended version of `cursor` with support of the named
-        parameters."""
+        """Extended version of `cursor` with support of the named parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param args: Dict with the parameters values.
+        :param prefetch: The number of rows the *cursor iterator* will prefetch (defaults to ``50``.)
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
@@ -87,8 +116,11 @@ class ConnectionX(asyncpg.connection.Connection):
     async def named_prepare(
         self, query: str, *, timeout: typing.Optional[float] = None
     ) -> prepared_statement.PreparedStatementX:
-        """Extended version of `prepare` with support of the named
-        parameters."""
+        """Extended version of `prepare` with support of the named parameters.
+
+        :param query: SQL query to execute (could include named parameters).
+        :param timeout: Optional timeout value in seconds.
+        """
         converted_query, params_order_list = query_module.construct_asyncpg_query(query)
         self._check_open()
         stmt = await self._get_statement(converted_query, timeout, named=True, use_cache=False)
