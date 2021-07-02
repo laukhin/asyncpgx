@@ -106,7 +106,7 @@ toml = ["toml"]
 
 [[package]]
 name = "docformatter"
-version = "1.3.1"
+version = "1.4"
 description = "Formats docstrings to follow PEP 257."
 category = "dev"
 optional = false
@@ -586,7 +586,7 @@ format = []
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "086be9ce96b3182c6cb9f49b101619b70c20a75bbb55fcb46aff9ffc10544ded"
+content-hash = "3a47fbb056af7dbc32d8650e5a1f41829db4936a128704d417935fb01e946c4d"
 
 [metadata.files]
 alabaster = [
@@ -675,7 +675,7 @@ coverage = [
     {file = "coverage-5.3.tar.gz", hash = "sha256:280baa8ec489c4f542f8940f9c4c2181f0306a8ee1a54eceba071a449fb870a0"},
 ]
 docformatter = [
-    {file = "docformatter-1.3.1.tar.gz", hash = "sha256:d8db663665becccac75737b2635a06076f2c832bf861322a7bfc512f0a9fa7e3"},
+    {file = "docformatter-1.4.tar.gz", hash = "sha256:064e6d81f04ac96bc0d176cbaae953a0332482b22d3ad70d47c8a7f2732eef6f"},
 ]
 docutils = [
     {file = "docutils-0.16-py2.py3-none-any.whl", hash = "sha256:0c5b78adfbf7762415433f5515cd5c9e762339e23369dbe8000d84a4bf4ab3af"},
