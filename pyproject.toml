@@ -12,7 +12,7 @@ keywords = ["postgresql", "asyncio", "asyncpg"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
-asyncpg = ">=0.21,<0.24"
+asyncpg = ">=0.21,<0.25"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.9.6"
