@@ -6,12 +6,6 @@ import typing
 
 
 PARAMS_REGEXP = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
-if sys.version_info >= (3, 7):
-    Match = re.Match  # pylint: disable=no-member
-else:  # pragma: no cover
-    import _sre
-
-    Match = _sre.SRE_Match  # pylint: disable=no-member
 
 
 def construct_asyncpg_query(query: str) -> typing.Tuple[str, typing.List]:
@@ -19,7 +13,7 @@ def construct_asyncpg_query(query: str) -> typing.Tuple[str, typing.List]:
     i = 1
     params_order_list = []
 
-    def _construct_replacement(match_obj: Match) -> str:
+    def _construct_replacement(match_obj: typing.Match) -> str:
         nonlocal i
         new_numeric_param = f'${i}'
         params_order_list.append(match_obj.group(0)[1::])
