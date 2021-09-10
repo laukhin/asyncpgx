@@ -1,7 +1,6 @@
 """Module with tools for queries processing."""
 import abc
 import re
-import sys
 import typing
 
 
