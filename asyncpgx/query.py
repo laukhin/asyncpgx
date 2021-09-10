@@ -1,10 +1,17 @@
 """Module with tools for queries processing."""
 import abc
 import re
+import sys
 import typing
 
 
 PARAMS_REGEXP = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
+if sys.version_info >= (3, 7):
+    Match = re.Match
+else:
+    import _sre
+
+    Match = _sre.SRE_MATCH
 
 
 def construct_asyncpg_query(query: str) -> typing.Tuple[str, typing.List]:
