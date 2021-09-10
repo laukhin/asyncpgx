@@ -8,7 +8,7 @@ import typing
 PARAMS_REGEXP = re.compile(r"(?<![:\w\x5c]):(\w+)(?!:)", re.UNICODE)
 if sys.version_info >= (3, 7):
     Match = re.Match  # pylint: disable=no-member
-else:
+else:  # pragma: no cover
     import _sre
 
     Match = _sre.SRE_Match  # pylint: disable=no-member
