@@ -11,7 +11,7 @@ if sys.version_info >= (3, 7):
 else:
     import _sre
 
-    Match = _sre.SRE_MATCH
+    Match = _sre.SRE_MATCH  # pylint: disable=no-member
 
 
 def construct_asyncpg_query(query: str) -> typing.Tuple[str, typing.List]:
