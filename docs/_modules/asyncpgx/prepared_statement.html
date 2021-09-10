@@ -179,7 +179,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">connection</span><span class="p">:</span> <span class="n">asyncpg</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span>
         <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">state</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>  <span class="c1"># i couldn&#39;t import PreparedStatementState</span>
         <span class="n">original_query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">params_order_list</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">,</span>
     <span class="p">):</span>
@@ -211,7 +211,8 @@
 <span class="sd">        :param timeout: Optional timeout value in seconds.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">prepared_args</span> <span class="o">=</span> <span class="n">query_module</span><span class="o">.</span><span class="n">QueryParamsDictConverter</span><span class="p">()</span><span class="o">.</span><span class="n">prepare_asyncpg_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_params_order_list</span><span class="p">)</span>
-        <span class="k">return</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="o">*</span><span class="n">prepared_args</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span></div>
+        <span class="n">query_result</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">List</span><span class="p">[</span><span class="n">asyncpg</span><span class="o">.</span><span class="n">Record</span><span class="p">]</span> <span class="o">=</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="o">*</span><span class="n">prepared_args</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">query_result</span></div>
 
 <div class="viewcode-block" id="PreparedStatementX.named_fetchval"><a class="viewcode-back" href="../../api.html#asyncpgx.prepared_statement.PreparedStatementX.named_fetchval">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">named_fetchval</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Dict</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
