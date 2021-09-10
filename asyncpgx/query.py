@@ -12,7 +12,7 @@ def construct_asyncpg_query(query: str) -> typing.Tuple[str, typing.List]:
     i = 1
     params_order_list = []
 
-    def _construct_replacement(match_obj) -> str:
+    def _construct_replacement(match_obj: re.Match) -> str:
         nonlocal i
         new_numeric_param = f'${i}'
         params_order_list.append(match_obj.group(0)[1::])

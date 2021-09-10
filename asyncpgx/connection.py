@@ -34,7 +34,8 @@ class ConnectionX(asyncpg.connection.Connection):
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
-        return await super().execute(converted_query, *asyncpg_args, timeout=timeout)
+        query_result: str = await super().execute(converted_query, *asyncpg_args, timeout=timeout)
+        return query_result
 
     async def named_executemany(self, query: str, args: typing.List, *, timeout: typing.Optional[float] = None) -> None:
         """Extended versions of `executemany` with support of the named
@@ -47,7 +48,8 @@ class ConnectionX(asyncpg.connection.Connection):
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsListDictConverter()
         )
-        return await super().executemany(converted_query, asyncpg_args, timeout=timeout)
+        query_result: None = await super().executemany(converted_query, asyncpg_args, timeout=timeout)
+        return query_result
 
     async def named_fetch(
         self, query: str, args: typing.Dict, timeout: typing.Optional[float] = None
@@ -61,7 +63,8 @@ class ConnectionX(asyncpg.connection.Connection):
         converted_query, asyncpg_args = self._prepare_asyncpg_parameters(
             query, args, query_module.QueryParamsDictConverter()
         )
-        return await super().fetch(converted_query, *asyncpg_args, timeout=timeout)
+        query_result: typing.List[asyncpg.Record] = await super().fetch(converted_query, *asyncpg_args, timeout=timeout)
+        return query_result
 
     async def named_fetchval(
         self, query: str, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None

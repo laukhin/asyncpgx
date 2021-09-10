@@ -5,7 +5,7 @@ from asyncpgx import connection as connection_module
 
 
 @pytest.mark.asyncio
-async def test_named_execute_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_execute_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_execute` method with named parameters."""
     await postgres_connection.named_execute(
         'INSERT INTO test(id, test_1, test_2) VALUES (:id, :test_1, :test_2);', {'id': 1, 'test_1': '1', 'test_2': '2'}
@@ -18,7 +18,7 @@ async def test_named_execute_with_named_parameters(postgres_connection: connecti
 
 
 @pytest.mark.asyncio
-async def test_named_executemany_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_executemany_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_executemany` method with named parameters."""
     await postgres_connection.named_executemany(
         'INSERT INTO test(id, test_1, test_2) VALUES (:id, :test_1, :test_2);',
@@ -37,7 +37,7 @@ async def test_named_executemany_with_named_parameters(postgres_connection: conn
 
 
 @pytest.mark.asyncio
-async def test_named_fetch_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_fetch_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_fetch` method with named parameters."""
     await postgres_connection.execute(
         '''
@@ -53,7 +53,7 @@ async def test_named_fetch_with_named_parameters(postgres_connection: connection
 
 
 @pytest.mark.asyncio
-async def test_named_fetchval_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_fetchval_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_fetchval` method with named parameters."""
     await postgres_connection.execute(
         '''
@@ -69,7 +69,7 @@ async def test_named_fetchval_with_named_parameters(postgres_connection: connect
 
 
 @pytest.mark.asyncio
-async def test_named_fetchrow_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_fetchrow_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_fetchrow` method with named parameters."""
     await postgres_connection.execute(
         '''
@@ -86,7 +86,7 @@ async def test_named_fetchrow_with_named_parameters(postgres_connection: connect
 
 
 @pytest.mark.asyncio
-async def test_named_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_cursor` method with named parameters."""
     await postgres_connection.execute(
         '''
@@ -103,7 +103,7 @@ async def test_named_cursor_with_named_parameters(postgres_connection: connectio
 
 
 @pytest.mark.asyncio
-async def test_named_prepare_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_prepare_cursor_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_prepare` with `named_cursor` method with named
     parameters."""
     await postgres_connection.execute(
@@ -123,7 +123,7 @@ async def test_named_prepare_cursor_with_named_parameters(postgres_connection: c
 
 
 @pytest.mark.asyncio
-async def test_named_prepare_fetch_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_prepare_fetch_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_prepare` with `named_fetch` method with named parameters."""
     await postgres_connection.execute('''INSERT INTO test (id, test_1, test_2) VALUES (1, '2', '3')''')
     prepared_statement = await postgres_connection.named_prepare(
@@ -138,7 +138,7 @@ async def test_named_prepare_fetch_with_named_parameters(postgres_connection: co
 
 
 @pytest.mark.asyncio
-async def test_named_prepare_fetchval_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_prepare_fetchval_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_prepare` with `named_fetchval` method with named
     parameters."""
     await postgres_connection.execute('''INSERT INTO test (id, test_1, test_2) VALUES (1, '2', '3'), (2, '4', '5')''')
@@ -152,7 +152,7 @@ async def test_named_prepare_fetchval_with_named_parameters(postgres_connection:
 
 
 @pytest.mark.asyncio
-async def test_named_prepare_fetchrow_with_named_parameters(postgres_connection: connection_module.ConnectionX):
+async def test_named_prepare_fetchrow_with_named_parameters(postgres_connection: connection_module.ConnectionX) -> None:
     """Test `named_prepare` with `named_fetchrow` method with named
     parameters."""
     await postgres_connection.execute('''INSERT INTO test (id, test_1, test_2) VALUES (1, '2', '3'), (2, '4', '5')''')

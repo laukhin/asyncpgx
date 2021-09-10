@@ -22,7 +22,7 @@ class PreparedStatementX(asyncpg.prepared_stmt.PreparedStatement):
         self,
         connection: asyncpg.Connection,
         query: str,
-        state,
+        state: typing.Any,  # i couldn't import PreparedStatementState
         original_query: str,
         params_order_list: typing.List,
     ):
@@ -54,7 +54,8 @@ class PreparedStatementX(asyncpg.prepared_stmt.PreparedStatement):
         :param timeout: Optional timeout value in seconds.
         """
         prepared_args = query_module.QueryParamsDictConverter().prepare_asyncpg_args(args, self._params_order_list)
-        return await super().fetch(*prepared_args, timeout=timeout)
+        query_result: typing.List[asyncpg.Record] = await super().fetch(*prepared_args, timeout=timeout)
+        return query_result
 
     async def named_fetchval(
         self, args: typing.Dict, column: int = 0, timeout: typing.Optional[float] = None
