@@ -19,7 +19,7 @@ python = "^3.6"
 asyncpg = ">=0.21,<0.25"
 
 [tool.poetry.dev-dependencies]
-pylint = "^2.10.2"
+pylint = "^2.11.1"
 mypy = "^0.910"
 docformatter = "^1.4"
 pytest = "^6.2.5"
