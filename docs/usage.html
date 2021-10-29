@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Usage &mdash; asyncpgx 1.0.2 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -70,9 +71,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="usage">
+  <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h1>
-<div class="section" id="connection-establishment">
+<section id="connection-establishment">
 <h2>Connection establishment<a class="headerlink" href="#connection-establishment" title="Permalink to this headline"></a></h2>
 <p>You can establish the connection via <cite>asyncpgx.create_pool</cite> or <cite>asyncpgx.connect</cite> functions.
 They have the same API as the original ones:</p>
@@ -80,8 +81,8 @@ They have the same API as the original ones:</p>
 <li><p><a class="reference external" href="https://magicstack.github.io/asyncpg/current/api/index.html#connection-pools">create_pool</a></p></li>
 <li><p><a class="reference external" href="https://magicstack.github.io/asyncpg/current/api/index.html#connection">connect</a></p></li>
 </ul>
-</div>
-<div class="section" id="quickstart">
+</section>
+<section id="quickstart">
 <h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline"></a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncpgx</span>
 
@@ -124,8 +125,8 @@ They have the same API as the original ones:</p>
     <span class="k">await</span> <span class="n">prepared_statement</span><span class="o">.</span><span class="n">named_fetchrow</span><span class="p">({</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
