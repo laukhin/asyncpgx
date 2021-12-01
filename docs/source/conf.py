@@ -20,11 +20,11 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'asyncpgx'
-copyright = '2020, Vladislav Laukhin'
+copyright = '2021, Vladislav Laukhin'
 author = 'Vladislav Laukhin'
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.2'
+release = '1.1.4'
 
 
 # -- General configuration ---------------------------------------------------
