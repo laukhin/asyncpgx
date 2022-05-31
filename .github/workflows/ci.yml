@@ -53,13 +53,13 @@ jobs:
           POSTGRES_TEST_DSN: postgresql://postgres:postgres@127.0.0.1:5432/postgres
 
       - name: Push test coverage
-        if: ${{ matrix.python-version == 3.8 && github.event_name == 'push' }}
+        if: ${{ matrix.python-version == '3.10' && github.event_name == 'push' }}
         run: bash <(curl -s https://codecov.io/bash)
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Push the docs
-        if: ${{ matrix.python-version == 3.8 && github.event_name == 'push' }}
+        if: ${{ matrix.python-version == '3.10' && github.event_name == 'push' }}
         run: |
              git remote set-url origin https://${{ secrets.DOCS_PUSH_GITHUB_LOGIN }}:${{ secrets.DOCS_PUSH_GITHUB_TOKEN }}@github.com/laukhin/asyncpgx.git
              git fetch --all
