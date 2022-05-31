@@ -2,6 +2,7 @@
 import pytest
 
 from asyncpgx import connection as connection_module
+from asyncpgx import exceptions
 
 
 @pytest.mark.asyncio
@@ -165,3 +166,40 @@ async def test_named_prepare_fetchrow_with_named_parameters(postgres_connection:
     assert query_result['id'] == 2
     assert query_result['test_1'] == '4'
     assert query_result['test_2'] == '5'
+
+
+@pytest.mark.asyncio
+async def test_missing_arguments(postgres_connection: connection_module.ConnectionX) -> None:
+    """Test missing arguments exception."""
+    with pytest.raises(exceptions.MissingRequiredArgumentError):
+        await postgres_connection.named_execute(
+            '''SELECT id, test_1, test_2 FROM test WHERE id=:id AND test_1=:test_1;''', {'id': 1}
+        )
+
+
+@pytest.mark.asyncio
+async def test_unused_arguments(postgres_connection: connection_module.ConnectionX) -> None:
+    """Test unused arguments exception."""
+    with pytest.raises(exceptions.UnusedArgumentsError):
+        await postgres_connection.named_execute(
+            '''SELECT id, test_1, test_2 FROM test WHERE id=:id;''', {'id': 1, 'test_1': '2'}
+        )
+
+
+@pytest.mark.asyncio
+async def test_missing_arguments_list(postgres_connection: connection_module.ConnectionX) -> None:
+    """Test missing arguments exception with list of params."""
+    with pytest.raises(exceptions.MissingRequiredArgumentError):
+        await postgres_connection.named_executemany(
+            '''SELECT id, test_1, test_2 FROM test WHERE id=:id AND test_1=:test_1;''', [{'id': 1}, {'id': 2}]
+        )
+
+
+@pytest.mark.asyncio
+async def test_unused_arguments_list(postgres_connection: connection_module.ConnectionX) -> None:
+    """Test unused arguments exception with list of params."""
+    with pytest.raises(exceptions.UnusedArgumentsError):
+        await postgres_connection.named_executemany(
+            '''SELECT id, test_1, test_2 FROM test WHERE id=:id;''',
+            [{'id': 1, 'test_1': '2'}, {'id': 2, 'test_1': '3'}],
+        )
