@@ -1,6 +1,5 @@
 """Module with tools for queries processing."""
 import abc
-import copy
 import re
 import typing
 
