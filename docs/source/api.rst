@@ -11,3 +11,8 @@ Prepared Statements
 ===================
 .. automodule:: asyncpgx.prepared_statement
    :members:
+
+Exceptions
+==========
+.. automodule:: asyncpgx.exceptions
+   :members:
