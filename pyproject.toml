@@ -4,7 +4,7 @@ build-backend = "poetry.masonry.api"
 
 [tool.poetry]
 name = "asyncpgx"
-version = "1.2.0"
+version = "1.2.1"
 description = "User-friendly extensions for asyncpg"
 authors = ["Vladislav Laukhin <laukhin97@gmail.com>"]
 readme = "README.md"
