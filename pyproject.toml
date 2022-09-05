@@ -70,3 +70,8 @@ max-line-length = 120
 
 [tool.pylint.master]
 extension-pkg-whitelist = ['pydantic', 'asyncpg']
+
+[tool.pylint.messages_control]
+disable = [
+    'no-self-use',
+]
