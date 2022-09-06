@@ -77,4 +77,4 @@ disable = [
 ]
 
 [tool.pytest]
-asyncio_mode = auto
+asyncio_mode = 'auto'
