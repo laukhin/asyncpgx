@@ -1,7 +1,7 @@
 """Common fixtures."""
 import os
 
-import pytest
+import pytest_asyncio
 
 from asyncpgx import connection as connection_module
 
@@ -9,7 +9,7 @@ from asyncpgx import connection as connection_module
 POSTGRES_DSN = os.getenv('POSTGRES_TEST_DSN', 'postgresql://127.0.0.1:5432')
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def postgres_connection():
     """Fixture which establishes the connection, creates the test table and
     cleans everything on scope close."""

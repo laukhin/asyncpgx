@@ -75,6 +75,3 @@ extension-pkg-whitelist = ['pydantic', 'asyncpg']
 disable = [
     'no-self-use',
 ]
-
-[tool.pytest]
-asyncio_mode = 'auto'
