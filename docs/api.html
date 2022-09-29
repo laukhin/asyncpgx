@@ -42,7 +42,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#connection">Connection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-asyncpgx.connection">Connection</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#asyncpgx.connection.ConnectionX"><code class="docutils literal notranslate"><span class="pre">ConnectionX</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#asyncpgx.connection.ConnectionX.named_cursor"><code class="docutils literal notranslate"><span class="pre">ConnectionX.named_cursor()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#asyncpgx.connection.ConnectionX.named_execute"><code class="docutils literal notranslate"><span class="pre">ConnectionX.named_execute()</span></code></a></li>
@@ -55,7 +55,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#prepared-statements">Prepared Statements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-asyncpgx.prepared_statement">Prepared Statements</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#asyncpgx.prepared_statement.PreparedStatementX"><code class="docutils literal notranslate"><span class="pre">PreparedStatementX</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#asyncpgx.prepared_statement.PreparedStatementX.named_cursor"><code class="docutils literal notranslate"><span class="pre">PreparedStatementX.named_cursor()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#asyncpgx.prepared_statement.PreparedStatementX.named_fetch"><code class="docutils literal notranslate"><span class="pre">PreparedStatementX.named_fetch()</span></code></a></li>
@@ -65,7 +65,7 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#exceptions">Exceptions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-asyncpgx.exceptions">Exceptions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#asyncpgx.exceptions.MissingRequiredArgumentError"><code class="docutils literal notranslate"><span class="pre">MissingRequiredArgumentError</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#asyncpgx.exceptions.UnusedArgumentsError"><code class="docutils literal notranslate"><span class="pre">UnusedArgumentsError</span></code></a></li>
 </ul>
@@ -100,10 +100,10 @@
              
   <section id="api-reference">
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h1>
-<section id="connection">
-<h2>Connection<a class="headerlink" href="#connection" title="Permalink to this heading"></a></h2>
+<section id="module-asyncpgx.connection">
+<span id="connection"></span><h2>Connection<a class="headerlink" href="#module-asyncpgx.connection" title="Permalink to this heading"></a></h2>
 <p>Module with extensions of asyncpg <cite>Connection</cite> class.</p>
-<span class="target" id="module-asyncpgx.connection"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="asyncpgx.connection.ConnectionX">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncpgx.connection.</span></span><span class="sig-name descname"><span class="pre">ConnectionX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">protocol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">addr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConnectionConfiguration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ConnectionParameters</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/connection.html#ConnectionX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#asyncpgx.connection.ConnectionX" title="Permalink to this definition"></a></dt>
 <dd><p>Extended version of asyncpg <cite>Connection</cite> class.</p>
@@ -221,10 +221,10 @@ parameters.</p>
 </dd></dl>
 
 </section>
-<section id="prepared-statements">
-<h2>Prepared Statements<a class="headerlink" href="#prepared-statements" title="Permalink to this heading"></a></h2>
+<section id="module-asyncpgx.prepared_statement">
+<span id="prepared-statements"></span><h2>Prepared Statements<a class="headerlink" href="#module-asyncpgx.prepared_statement" title="Permalink to this heading"></a></h2>
 <p>Module with extensions of asyncpg <cite>PreparedStatement</cite> class.</p>
-<span class="target" id="module-asyncpgx.prepared_statement"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="asyncpgx.prepared_statement.PreparedStatementX">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncpgx.prepared_statement.</span></span><span class="sig-name descname"><span class="pre">PreparedStatementX</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_query</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params_order_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/asyncpgx/prepared_statement.html#PreparedStatementX"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#asyncpgx.prepared_statement.PreparedStatementX" title="Permalink to this definition"></a></dt>
 <dd><p>Extended version of asyncpg <cite>PreparedStatement</cite> class.</p>
@@ -291,10 +291,10 @@ ones</p>
 </dd></dl>
 
 </section>
-<section id="exceptions">
-<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading"></a></h2>
+<section id="module-asyncpgx.exceptions">
+<span id="exceptions"></span><h2>Exceptions<a class="headerlink" href="#module-asyncpgx.exceptions" title="Permalink to this heading"></a></h2>
 <p>Library exceptions.</p>
-<span class="target" id="module-asyncpgx.exceptions"></span><dl class="py exception">
+<dl class="py exception">
 <dt class="sig sig-object py" id="asyncpgx.exceptions.MissingRequiredArgumentError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">asyncpgx.exceptions.</span></span><span class="sig-name descname"><span class="pre">MissingRequiredArgumentError</span></span><a class="reference internal" href="_modules/asyncpgx/exceptions.html#MissingRequiredArgumentError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#asyncpgx.exceptions.MissingRequiredArgumentError" title="Permalink to this definition"></a></dt>
 <dd><p>There is a missing argument in query.</p>
