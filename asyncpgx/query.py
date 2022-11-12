@@ -1,7 +1,7 @@
 """Module with tools for queries processing."""
+import abc
 import re
 import typing
-from abc import ABC
 
 from asyncpgx import exceptions
 
