@@ -20,7 +20,7 @@ asyncpg = ">=0.21,<0.28"
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.9"
-mypy = "^0.982"
+mypy = "^0.990"
 docformatter = "^1.5"
 pytest = "^7.2.0"
 pytest-cov = "^4.0.0"
